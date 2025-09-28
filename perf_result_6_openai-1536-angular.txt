@@ -1,0 +1,16 @@
+# started on Wed Aug 13 12:50:55 2025
+
+
+ Performance counter stats for './cmake-build-debug/src/search_hnsw_avx512_dist -d 6 -p 32 -i ./DATA/_openai-1536-angular/_openai-1536-angular_ef500_M16_pca.index -q /home/wbh/cppwork/Res-Infer/DATA/_openai-1536-angular/_openai-1536-angular_query.fvecs -g /home/wbh/cppwork/Res-Infer/DATA/_openai-1536-angular/_openai-1536-angular_groundtruth.ivecs -r ./results/recall@10/hnsw/avx512/openai-1536-angular/new/openai-1536-angular_ad_hnsw_6_dist_time.log -t ./DATA/_openai-1536-angular/_openai-1536-angular_pca_matrix.fvecs -l ./DATA/_openai-1536-angular/linear/linear_hnsw1_pca_10.log -k 10 -s 100':
+
+    91,814,998,046      instructions              #    0.53  insn per cycle         
+   172,677,706,690      cycles                                                      
+    10,488,269,271      branches                                                    
+       416,840,649      branch-misses             #    3.97% of all branches        
+
+      87.572435578 seconds time elapsed
+
+      54.216146000 seconds user
+       6.090090000 seconds sys
+
+

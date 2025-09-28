@@ -1,0 +1,6 @@
+faiss
+numpy
+scikit-learn
+matplotlib
+scipy
+tqdm

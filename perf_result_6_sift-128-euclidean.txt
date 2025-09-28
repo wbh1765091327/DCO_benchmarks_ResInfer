@@ -1,0 +1,16 @@
+# started on Wed Aug 13 12:48:50 2025
+
+
+ Performance counter stats for './cmake-build-debug/src/search_hnsw_avx512_dist -d 6 -p 32 -i ./DATA/_sift-128-euclidean/_sift-128-euclidean_ef500_M16_pca.index -q /home/wbh/cppwork/Res-Infer/DATA/_sift-128-euclidean/_sift-128-euclidean_query.fvecs -g /home/wbh/cppwork/Res-Infer/DATA/_sift-128-euclidean/_sift-128-euclidean_groundtruth.ivecs -r ./results/recall@10/hnsw/avx512/sift-128-euclidean/new/sift-128-euclidean_ad_hnsw_6_dist_time.log -t ./DATA/_sift-128-euclidean/_sift-128-euclidean_pca_matrix.fvecs -l ./DATA/_sift-128-euclidean/linear/linear_hnsw1_pca_10.log -k 10 -s 100':
+
+    14,103,563,566      instructions              #    0.77  insn per cycle         
+    18,382,337,295      cycles                                                      
+     1,795,504,479      branches                                                    
+        69,132,513      branch-misses             #    3.85% of all branches        
+
+       6.364105859 seconds time elapsed
+
+       5.885613000 seconds user
+       0.475807000 seconds sys
+
+
