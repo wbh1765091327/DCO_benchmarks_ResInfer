@@ -46,6 +46,32 @@ namespace Index_PQ {
             fin >> W_[0] >> W_[1] >> B_[0];
             fin.close();
         }
+                // 新增：获取码本真实内存大小
+        [[nodiscard]] size_t codebook_size_bytes() const {
+            size_t total_size = 0;
+            for (const auto& sub_vec : pq_book) {
+                for (const auto& cluster : sub_vec) {
+                    total_size += cluster.size() * sizeof(float);
+                }
+            }
+            return total_size;
+        }
+
+        // 新增：获取查找表真实内存大小
+        [[nodiscard]] size_t dist_map_size_bytes() const {
+            return sub_vector * sub_cluster_count * sizeof(float);
+        }
+
+        // 新增：获取量化码真实内存大小
+        [[nodiscard]] size_t pq_codes_size_bytes() const {
+            return (pq_mp != nullptr) ? (nd_ * sub_vector * sizeof(uint8_t)) : 0;
+        }
+
+        // 新增：获取量化误差真实内存大小
+        [[nodiscard]] size_t node_cluster_dist_size_bytes() const {
+            return (node_cluster_dist_ != nullptr) ? (nd_ * sizeof(float)) : 0;
+        }
+
 
         __attribute__((always_inline))
         inline bool linear_classifier_default_pq(float app_dist, float cluster_dist, float thresh_dist) {

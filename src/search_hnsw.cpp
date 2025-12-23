@@ -301,6 +301,34 @@ int main(int argc, char *argv[]) {
         PQ->load_linear_model(linear_path);
         appr_alg->PQ = PQ;
         appr_alg->encoder_origin_data();
+         // 计算查找表大小（需要先调用 calc_dist_map）
+         PQ->calc_dist_map(Q.data);  // 为第一个查询计算 dist_mp
+        
+         // 输出真实内存大小（只输出一次）
+         static bool log_printed = false;
+         if (!log_printed) {
+             size_t codebook_size = PQ->codebook_size_bytes();
+             size_t dist_map_size = PQ->dist_map_size_bytes();
+             size_t pq_codes_size = PQ->pq_codes_size_bytes();
+             size_t node_cluster_dist_size = PQ->node_cluster_dist_size_bytes();
+             
+             std::cerr << "[IVF-OPQ] Actual memory size:\n"
+                     << "  - Codebook (pq_book) size: " << codebook_size << " bytes ("
+                     << (codebook_size / 1024.0 / 1024.0) << " MB)\n"
+                     << "  - Distance map (dist_mp) size: " << dist_map_size << " bytes ("
+                     << (dist_map_size / 1024.0) << " KB)\n"
+                     << "  - PQ codes (pq_mp) size: " << pq_codes_size << " bytes ("
+                     << (pq_codes_size / 1024.0 / 1024.0) << " MB)\n"
+                     << "  - Node cluster dist size: " << node_cluster_dist_size << " bytes ("
+                     << (node_cluster_dist_size / 1024.0 / 1024.0) << " MB)\n"
+                     << "  - Total PQ memory: " 
+                     << (codebook_size + dist_map_size + pq_codes_size + node_cluster_dist_size) 
+                     << " bytes ("
+                     << ((codebook_size + dist_map_size + pq_codes_size + node_cluster_dist_size) / 1024.0 / 1024.0)
+                     << " MB)\n";
+             
+             log_printed = true;
+         }
         StopW stopw = StopW();
         PQ->project_vector(Q.data, Q.n);
         rotation_time = stopw.getElapsedTimeMicro() / Q.n;
